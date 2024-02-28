@@ -53,27 +53,27 @@ file* parcour(graph* g, int s1, void (*add)(pf*, void*), void* (*ext)(pf*)) {
     for (int i=0; i<g->size; i++) {
         vue[i] = false;
     }
-    pf* sac = (pf*) malloc(sizeof(pf));
-    list* il = init_list(itv(s1));
+    /*pf* sac = (pf*) malloc(sizeof(pf));
+    list* il = init_list((void*) s1);
     sac->d = il;
-    sac->f = il;
+    sac->f = il;*/
+    pf* sac = init_pf();
+    add_file(sac, (void*) s1);
 
-    file* par = init_file(NULL);
+    file* par = init_file();
     while (sac->d != NULL) {
         int* ps = (int*) (*ext)(sac);  // ps != NULL car sac non vide
-        int s = *ps;
+        int s = (int) ps;
         if (vue[s] == false) {
             vue[s] = true;
-            add_file(par, itv(s));
+            add_file(par, (void*) s);
             for (int i=0; i<g->size; i++) {
-                if (g->matris_adj[s][i] != 0) (*add)(sac, itv(i));
+                if (g->matris_adj[s][i] != 0) (*add)(sac, (void*) i);
             }
         }
-        free(ps);
     }
-    free_pf(sac, free);
+    free_pf(sac, NULL);
     free(vue);
-    extract_file(par);
     return par;
 }
 

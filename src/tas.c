@@ -19,7 +19,7 @@ heap* init_heap(int val, void* data, bool (*cmp)(int, int)) {
 
 void free_heap(heap* h, void (*free_data)(void*)) {
   for (int i=0; i<h->size; i++) {
-    (*free_data)(h->tab[i]->data);
+    if (free_data != NULL) (*free_data)(h->tab[i]->data);
     free(h->tab[i]);
   }
   free(h->tab);
