@@ -9,7 +9,7 @@
 #include "include/tas.h"
 
 void print_int(void* i) {
-    int a = (int) (*((int**)i));
+    int a = (int) (long) (*((int**)i));
     printf("%d, ", a);
 }
 
@@ -106,7 +106,7 @@ int main() {
     while (h->size > 0) {
         int* b;
         int val = extract_heap(h, (void**) &b);
-        printf("%d, %d\n", val, (int)b);
+        printf("%d, %d\n", val, (int)(long)b);
     }
     printf("\n");
 

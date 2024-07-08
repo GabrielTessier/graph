@@ -1,13 +1,10 @@
 
 FLAGS= -Wall -Wextra -fsanitize=address,undefined -g
 SRC = $(wildcard src/*.c)
-OBJ = $(SRC:%.c=build/%.o)
+OBJ = $(SRC:src/%.c=build/obj/%.o)
 
-compile:
-	mkdir -p build/src
-	make test
-
-test:$(OBJ)
+compile: $(OBJ)
+	mkdir -p build
 	gcc $(FLAGS) -o build/build $^ test.c
 
 run:
@@ -16,5 +13,6 @@ run:
 clean : 
 	rm -rf build
 
-build/%.o:%.c
+build/obj/%.o:src/%.c
+	mkdir -p build/obj
 	gcc $(FLAGS) -c -o $@ $<
