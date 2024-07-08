@@ -58,17 +58,17 @@ file* parcour(graph* g, int s1, void (*add)(pf*, void*), void* (*ext)(pf*)) {
     sac->d = il;
     sac->f = il;*/
     pf* sac = init_pf();
-    add_file(sac, (void*) s1);
+    add_file(sac, (void*) (long) s1);
 
     file* par = init_file();
     while (sac->d != NULL) {
         int* ps = (int*) (*ext)(sac);  // ps != NULL car sac non vide
-        int s = (int) ps;
+        int s = (int) (long) ps;
         if (vue[s] == false) {
             vue[s] = true;
-            add_file(par, (void*) s);
+            add_file(par, (void*) (long) s);
             for (int i=0; i<g->size; i++) {
-                if (g->matris_adj[s][i] != 0) (*add)(sac, (void*) i);
+                if (g->matris_adj[s][i] != 0) (*add)(sac, (void*) (long) i);
             }
         }
     }
