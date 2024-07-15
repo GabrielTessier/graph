@@ -18,15 +18,18 @@ int main() {
     // FILE
     printf("FILE :\n");
 
+    // créer un file contenant les valeur 1, 2, 3, 4
     file* f = init_file();
     add_file(f, (int*) 1);
     add_file(f, (int*) 2);
     add_file(f, (int*) 3);
     add_file(f, (int*) 4);
 
+    // print chaque entier de la file f
     iter_file(f, print_int);
     printf("\n");
 
+    // Vide la file f en affichant chaque valeur
     while (file_vide(f) == false) {
         int* v = (int*) extract_file(f);
         print_int(&v);
@@ -49,12 +52,14 @@ int main() {
     // PILE
     printf("\nPILE :\n");
 
+    // Créer une pile contenant les valeurs 1, 2, 3, 4
     pile* p = init_pile();
     add_pile(p, (int*) 1);
     add_pile(p, (int*) 2);
     add_pile(p, (int*) 3);
     add_pile(p, (int*) 4);
 
+    // Vide la pile en affichant chaque valeur
     while (pile_vide(p) == false) {
         int* v = (int*) extract_pile(p);
         print_int(&v);
@@ -75,6 +80,7 @@ int main() {
     // GRAPH
     printf("\nGRAPH :\n");
 
+    // Créer un graphe
     graph* g = init_graph(6, true);
     add_arc(g, 0, 1);
     add_arc(g, 0, 2);
