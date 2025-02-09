@@ -2,10 +2,9 @@
 #include <stdbool.h>
 #include <stdlib.h>
 
-#include "../include/pile_file.h"
-#include "../include/tool.h"
-#include "../include/tas.h"
-#include "../include/graph.h"
+#include "../external/list/list.h"
+#include "tas.h"
+#include "graph.h"
 
 graph* init_graph(int size, bool oriente) {
     graph* g = (graph*) malloc(sizeof(graph));
@@ -48,16 +47,12 @@ void free_graph(graph* g) {
     free(g);
 }
 
-file* parcour(graph* g, int s1, void (*add)(pf*, void*), void* (*ext)(pf*)) {
+file* parcour(graph* g, int s1, void (*add)(list_t*, void*), void* (*ext)(list_t*)) {
     bool* vue = (bool*) malloc(sizeof(bool)*g->size);
     for (int i=0; i<g->size; i++) {
         vue[i] = false;
     }
-    /*pf* sac = (pf*) malloc(sizeof(pf));
-    list* il = init_list((void*) s1);
-    sac->d = il;
-    sac->f = il;*/
-    pf* sac = init_pf();
+    list_t* sac = init_list_t();
     add_file(sac, (void*) (long) s1);
 
     file* par = init_file();
@@ -72,7 +67,7 @@ file* parcour(graph* g, int s1, void (*add)(pf*, void*), void* (*ext)(pf*)) {
             }
         }
     }
-    free_pf(sac, NULL);
+    free_list_t(sac, NULL);
     free(vue);
     return par;
 }
@@ -82,6 +77,10 @@ file* parcour_largeur(graph* g, int s1) {
 }
 file* parcour_profondeur(graph* g, int s1) {
     return parcour(g, s1, add_pile, extract_pile);
+}
+
+bool inf(int a, int b) {
+    return a<b;
 }
 
 int* dijkstra(graph* g, int s1) {

@@ -1,6 +1,7 @@
 
 FLAGS= -Wall -Wextra -fsanitize=address,undefined -g
 SRC = $(wildcard src/*.c)
+SRC += external/list/list.c
 OBJ = $(SRC:src/%.c=build/obj/%.o)
 
 compile: $(OBJ)

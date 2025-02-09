@@ -2,7 +2,7 @@
 #include <stdlib.h>
 #include <stdio.h>
 
-#include "../include/tas.h"
+#include "tas.h"
 
 
 heap* init_heap(int val, void* data, bool (*cmp)(int, int)) {

@@ -3,7 +3,7 @@
 #define GRAPH_H
 
 #include <stdbool.h>
-#include "pile_file.h"
+#include "../external/list/list.h"
 
 struct graph {
     int size;
@@ -21,7 +21,7 @@ graph* init_graph(int size, bool oriente);
 void add_arc(graph* g, int s1, int s2);
 
 /* Retire l'arc entre les sommets `s1` et `s2` dans le graphe `g` */
-void delete_arc(graph*g, int s1, int s2);
+void delete_arc(graph* g, int s1, int s2);
 
 /* Ajoute un arc entre les sommets `s1` et `s2` avec le poid `w` dans le graphe `g` */
 void add_arc_p(graph* g, int s1, int s2, float w);
@@ -30,13 +30,15 @@ void add_arc_p(graph* g, int s1, int s2, float w);
 void free_graph(graph* g);
 
 /* Parcour depuis `s1` utilisant la fonction `add` pour ajouter dans le sac et `ext` pour retirer un élément du sac */
-file* parcour(graph* g, int s1, void (*add)(pf*, void*), void* (*ext)(pf*));
+file* parcour(graph* g, int s1, void (*add)(list_t*, void*), void* (*ext)(list_t*));
 
 /* Parcour en largeur depuis `s1` */
 file* parcour_largeur(graph* g, int s1);
 
 /* Parcour en profondeur depuis `s1` */
 file* parcour_profondeur(graph* g, int s1);
+
+bool inf(int a, int b);
 
 /* Algorithme de Dijkstra depuis `s1` */
 int* dijkstra(graph* g, int s1);

@@ -3,10 +3,9 @@
 #include <stdlib.h>
 #include <stdbool.h>
 
-#include "include/pile_file.h"
-#include "include/graph.h"
-#include "include/tool.h"
-#include "include/tas.h"
+#include "external/list/list.h"
+#include "src/graph.h"
+#include "src/tas.h"
 
 void print_int(void* i) {
     int a = (int) (long) (*((int**)i));
@@ -14,69 +13,6 @@ void print_int(void* i) {
 }
 
 int main() {
-
-    // FILE
-    printf("FILE :\n");
-
-    // créer un file contenant les valeur 1, 2, 3, 4
-    file* f = init_file();
-    add_file(f, (int*) 1);
-    add_file(f, (int*) 2);
-    add_file(f, (int*) 3);
-    add_file(f, (int*) 4);
-
-    // print chaque entier de la file f
-    iter_file(f, print_int);
-    printf("\n");
-
-    // Vide la file f en affichant chaque valeur
-    while (file_vide(f) == false) {
-        int* v = (int*) extract_file(f);
-        print_int(&v);
-        printf("\n");
-    }
-
-    add_file(f, (int*) 3);
-
-    free_file(f, NULL);
-
-    file* f2 = init_file();
-    add_file(f2, (int*) 1);
-    add_file(f2, (int*) 2);
-    add_file(f2, (int*) 3);
-    add_file(f2, (int*) 4);
-
-    free_file(f2, NULL);
-
-
-    // PILE
-    printf("\nPILE :\n");
-
-    // Créer une pile contenant les valeurs 1, 2, 3, 4
-    pile* p = init_pile();
-    add_pile(p, (int*) 1);
-    add_pile(p, (int*) 2);
-    add_pile(p, (int*) 3);
-    add_pile(p, (int*) 4);
-
-    // Vide la pile en affichant chaque valeur
-    while (pile_vide(p) == false) {
-        int* v = (int*) extract_pile(p);
-        print_int(&v);
-        printf("\n");
-    }
-
-    free_pile(p, NULL);
-
-    pile* p2 = init_pile();
-    add_pile(p2, (int*) 1);
-    add_pile(p2, (int*) 2);
-    add_pile(p2, (int*) 3);
-    add_pile(p2, (int*) 4);
-
-    free_pile(p2, NULL);
-
-
     // GRAPH
     printf("\nGRAPH :\n");
 
